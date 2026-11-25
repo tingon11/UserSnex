@@ -1,0 +1,2204 @@
+# UserSnex — siti curati da UserSnex.  Copyright (C) 2026 Andrea Cumini <andrea@osintinfo.net>
+# SPDX-License-Identifier: GPL-3.0-or-later  (+ attribuzione obbligatoria, GPL 7(b): vedi ADDITIONAL_TERMS.md)
+#
+# È l'unica lista di siti nel repository: WhatsMyName, Sherlock e Maigret si scaricano dai loro
+# repository (scheda Config > Aggiorna liste) e restano fuori da git. Anche questo file si aggiorna
+# dalla scheda Config. I siti personali dell'utente stanno in mytargets.yaml, non qui.
+#
+# Ogni sito è verificato con un account vero (trovato) e uno inventato (non trovato).
+
+# ============================================================ siti trovati da UserSnex
+# Assenti da WhatsMyName, Sherlock e Maigret.
+- name: Altervista
+  category: blog
+  url: https://{username}.altervista.org
+  check_url: https://{username}.altervista.org
+  type: html
+  regex: "^[A-Za-z0-9-]{3,40}$"
+  found_status: [200]
+  dns_missing: true          # se il sottodominio non esiste nel DNS, il blog non c'è
+  known: ["mario"]
+- name: Audius
+  category: musica
+  url: https://audius.co/{username}
+  check_url: https://api.audius.co/v1/users/handle/{username}?app_name=UserSnex
+  require: data.id
+  fields:
+    display_name: data.name
+    bio: data.bio
+    location: data.location
+  known:
+  - audius
+  source: UserSnex (verificato 23/11/2026)
+- name: Bear Blog
+  category: blog
+  url: https://{username}.bearblog.dev
+  check_url: https://{username}.bearblog.dev
+  type: html
+  regex: ^[A-Za-z0-9-]{1,40}$
+  dns_missing: true
+  known:
+  - herman
+  source: UserSnex (verificato 23/11/2026)
+- name: BookWyrm (bookwyrm.social)
+  category: libri
+  url: https://bookwyrm.social/user/{username}
+  check_url: https://bookwyrm.social/user/{username}.json
+  require: id
+  fields:
+    display_name: name
+    bio: summary
+    created_at: published
+  known:
+  - mouse
+  source: UserSnex (verificato 23/11/2026)
+- name: Framagit
+  category: sviluppo
+  url: https://framagit.org/{username}
+  check_url: https://framagit.org/api/v4/users?username={username}
+  require: 0.id
+  fields:
+    display_name: 0.name
+    avatar: 0.avatar_url
+  known:
+  - luc
+  source: UserSnex (verificato 23/11/2026)
+- name: Gitea (git.lattuga.net)
+  category: sviluppo
+  tags:
+  - it
+  url: https://git.lattuga.net/{username}
+  check_url: https://git.lattuga.net/api/v1/users/{username}
+  require: id
+  fields:
+    display_name: full_name
+    bio: description
+    location: location
+    avatar: avatar_url
+    created_at: created
+    links:
+    - website
+  known:
+  - boyska
+  source: UserSnex (verificato 23/11/2026)
+- name: Hex.pm
+  category: sviluppo
+  url: https://hex.pm/users/{username}
+  check_url: https://hex.pm/api/users/{username}
+  require: username
+  fields:
+    display_name: full_name
+    created_at: inserted_at
+  known:
+  - josevalim
+  source: UserSnex (verificato 23/11/2026)
+- name: ListenBrainz
+  category: musica
+  url: https://listenbrainz.org/user/{username}/
+  check_url: https://api.listenbrainz.org/1/user/{username}/listen-count
+  require: payload.count
+  known:
+  - rob
+  source: UserSnex (verificato 23/11/2026)
+- name: Mastodon (livellosegreto.it)
+  category: social
+  tags:
+  - it
+  url: https://livellosegreto.it/@{username}
+  check_url: https://livellosegreto.it/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - andrea
+  source: UserSnex (verificato 23/11/2026)
+- name: Mastodon (mastodon.bida.im)
+  category: social
+  tags:
+  - it
+  url: https://mastodon.bida.im/@{username}
+  check_url: https://mastodon.bida.im/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - admin
+  source: UserSnex (verificato 23/11/2026)
+- name: Mastodon (mastodon.cisti.org)
+  category: social
+  tags:
+  - it
+  url: https://mastodon.cisti.org/@{username}
+  check_url: https://mastodon.cisti.org/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - admin
+  source: UserSnex (verificato 23/11/2026)
+- name: Mastodon (sociale.network)
+  category: social
+  tags:
+  - it
+  url: https://sociale.network/@{username}
+  check_url: https://sociale.network/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - andrea
+  source: UserSnex (verificato 23/11/2026)
+- name: Mataroa
+  category: blog
+  url: https://{username}.mataroa.blog
+  check_url: https://{username}.mataroa.blog
+  type: html
+  regex: ^[A-Za-z0-9-]{1,40}$
+  dns_missing: true
+  known:
+  - sirodoht
+  source: UserSnex (verificato 23/11/2026)
+- name: Ollama
+  category: sviluppo
+  url: https://ollama.com/{username}
+  check_url: https://ollama.com/{username}
+  type: html
+  known:
+  - library
+  source: UserSnex (verificato 23/11/2026)
+- name: PeerTube (video.linux.it)
+  category: video
+  tags:
+  - it
+  url: https://video.linux.it/a/{username}
+  check_url: https://video.linux.it/api/v1/accounts/{username}
+  require: id
+  fields:
+    display_name: displayName
+    bio: description
+    created_at: createdAt
+  known:
+  - root
+  source: UserSnex (verificato 23/11/2026)
+- name: Pixelfed (pixelfed.uno)
+  category: foto
+  tags:
+  - it
+  url: https://pixelfed.uno/{username}
+  check_url: https://pixelfed.uno/{username}
+  type: html
+  regex: ^[A-Za-z0-9_.]{2,30}$
+  known:
+  - mario
+  source: UserSnex (verificato 23/11/2026)
+- name: Quay.io
+  category: sviluppo
+  url: https://quay.io/user/{username}
+  check_url: https://quay.io/api/v1/users/{username}
+  require: username
+  known:
+  - jzelinskie
+  source: UserSnex (verificato 23/11/2026)
+- name: Replicate
+  category: sviluppo
+  url: https://replicate.com/{username}
+  check_url: https://replicate.com/{username}
+  type: html
+  known:
+  - meta
+  source: UserSnex (verificato 23/11/2026)
+- name: Salsa (Debian GitLab)
+  category: sviluppo
+  url: https://salsa.debian.org/{username}
+  check_url: https://salsa.debian.org/api/v4/users?username={username}
+  require: 0.id
+  fields:
+    display_name: 0.name
+    avatar: 0.avatar_url
+  known:
+  - lamby
+  source: UserSnex (verificato 23/11/2026)
+- name: Tildes
+  category: forum
+  url: https://tildes.net/user/{username}
+  check_url: https://tildes.net/user/{username}
+  type: html
+  known:
+  - Deimos
+  source: UserSnex (verificato 23/11/2026)
+- name: Val Town
+  category: sviluppo
+  url: https://www.val.town/u/{username}
+  check_url: https://api.val.town/v1/alias/{username}
+  require: id
+  fields:
+    display_name: username
+    bio: bio
+    avatar: profileImageUrl
+  known:
+  - stevekrouse
+  source: UserSnex (verificato 23/11/2026)
+- name: Wikipedia (it)
+  category: wiki
+  url: https://it.wikipedia.org/wiki/Utente:{username}
+  check_url: https://it.wikipedia.org/w/api.php?action=query&list=users&ususers={username}&usprop=registration&format=json
+  require: query.users.0.userid
+  fields:
+    created_at: query.users.0.registration
+  known: ["Jimbo Wales"]
+
+# ---- Europa, Balcani, Russia, Nord Africa, Turchia (aggiunti il 24/11/2026)
+- name: AbcLinuxu
+  category: sviluppo
+  tags:
+  - cz
+  url: https://www.abclinuxu.cz/lide/{username}
+  check_url: https://www.abclinuxu.cz/lide/{username}
+  type: html
+  known:
+  - davkol
+  source: UserSnex (verificato 24/11/2026)
+  absent_text:
+  - <title>Chyba!</title>
+  present_text:
+  - '<title>Profil - '
+- name: Hardwareluxx
+  category: forum
+  tags:
+  - de
+  url: https://www.hardwareluxx.de/community/members/?username={username}
+  check_url: https://www.hardwareluxx.de/community/members/?username={username}
+  type: html
+  follow_redirects: false
+  found_status:
+  - 301
+  - 302
+  - 303
+  missing_status:
+  - 200
+  - 404
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Hsoub I/O
+  category: social
+  tags:
+  - ar
+  url: https://io.hsoub.com/u/{username}
+  check_url: https://io.hsoub.com/u/{username}
+  type: html
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Lemmy (lemmy.pt)
+  category: social
+  tags:
+  - pt
+  url: https://lemmy.pt/u/{username}
+  check_url: https://lemmy.pt/api/v3/user?username={username}
+  regex: ^[A-Za-z0-9_]{3,30}$
+  require: person_view.person.id
+  missing_status:
+  - 400
+  - 404
+  fields:
+    display_name: person_view.person.display_name
+    bio: person_view.person.bio
+    created_at: person_view.person.published
+  known:
+  - sparky
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (berlin.social)
+  category: social
+  tags:
+  - de
+  url: https://berlin.social/@{username}
+  check_url: https://berlin.social/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (eldritch.cafe)
+  category: social
+  tags:
+  - fr
+  url: https://eldritch.cafe/@{username}
+  check_url: https://eldritch.cafe/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (floss.social)
+  category: social
+  url: https://floss.social/@{username}
+  check_url: https://floss.social/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (hessen.social)
+  category: social
+  tags:
+  - de
+  url: https://hessen.social/@{username}
+  check_url: https://hessen.social/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (kafeneio.social)
+  category: social
+  tags:
+  - gr
+  url: https://kafeneio.social/@{username}
+  check_url: https://kafeneio.social/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - foufoutos
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (mastodon.bayern)
+  category: social
+  tags:
+  - de
+  url: https://mastodon.bayern/@{username}
+  check_url: https://mastodon.bayern/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - Donaupiratin
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (mastodon.com.tr)
+  category: social
+  tags:
+  - tr
+  url: https://mastodon.com.tr/@{username}
+  check_url: https://mastodon.com.tr/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (mastodon.de)
+  category: social
+  tags:
+  - de
+  url: https://mastodon.de/@{username}
+  check_url: https://mastodon.de/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (mastodon.ee)
+  category: social
+  tags:
+  - ee
+  url: https://mastodon.ee/@{username}
+  check_url: https://mastodon.ee/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - thomas
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (mastodon.gal)
+  category: social
+  tags:
+  - es
+  url: https://mastodon.gal/@{username}
+  check_url: https://mastodon.gal/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - xornaldecompostela
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (mastodon.green)
+  category: social
+  url: https://mastodon.green/@{username}
+  check_url: https://mastodon.green/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (mastodon.hr)
+  category: social
+  tags:
+  - hr
+  url: https://mastodon.hr/@{username}
+  check_url: https://mastodon.hr/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - mario
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (mastodon.ie)
+  category: social
+  tags:
+  - ie
+  url: https://mastodon.ie/@{username}
+  check_url: https://mastodon.ie/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (mastodon.nu)
+  category: social
+  tags:
+  - se
+  url: https://mastodon.nu/@{username}
+  check_url: https://mastodon.nu/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (mastodontti.fi)
+  category: social
+  tags:
+  - fi
+  url: https://mastodontti.fi/@{username}
+  check_url: https://mastodontti.fi/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - thomas
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (mementomori.social)
+  category: social
+  tags:
+  - es
+  url: https://mementomori.social/@{username}
+  check_url: https://mementomori.social/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (mstdn.dk)
+  category: social
+  tags:
+  - dk
+  url: https://mstdn.dk/@{username}
+  check_url: https://mstdn.dk/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (muenchen.social)
+  category: social
+  tags:
+  - de
+  url: https://muenchen.social/@{username}
+  check_url: https://muenchen.social/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - thomas
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (norden.social)
+  category: social
+  tags:
+  - de
+  url: https://norden.social/@{username}
+  check_url: https://norden.social/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (nrw.social)
+  category: social
+  tags:
+  - de
+  url: https://nrw.social/@{username}
+  check_url: https://nrw.social/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (social.anoxinon.de)
+  category: social
+  tags:
+  - de
+  url: https://social.anoxinon.de/@{username}
+  check_url: https://social.anoxinon.de/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (social.cleverlibre.org, ex qoto.org)
+  category: social
+  url: https://social.cleverlibre.org/@{username}
+  check_url: https://social.cleverlibre.org/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - protestation
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (social.coop)
+  category: social
+  url: https://social.coop/@{username}
+  check_url: https://social.coop/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (social.linux.pizza)
+  category: social
+  tags:
+  - se
+  url: https://social.linux.pizza/@{username}
+  check_url: https://social.linux.pizza/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (social.vivaldi.net)
+  category: social
+  tags:
+  - 'no'
+  url: https://social.vivaldi.net/@{username}
+  check_url: https://social.vivaldi.net/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (sueden.social)
+  category: social
+  tags:
+  - de
+  url: https://sueden.social/@{username}
+  check_url: https://sueden.social/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (toot.aquilenet.fr)
+  category: social
+  tags:
+  - fr
+  url: https://toot.aquilenet.fr/@{username}
+  check_url: https://toot.aquilenet.fr/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+- name: Mastodon (toot.wales)
+  category: social
+  tags:
+  - gb
+  url: https://toot.wales/@{username}
+  check_url: https://toot.wales/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+- name: Menéame
+  category: social
+  tags:
+  - es
+  url: https://www.meneame.net/user/{username}
+  check_url: https://www.meneame.net/user/{username}
+  type: html
+  known:
+  - Delavid
+  source: UserSnex (verificato 24/11/2026)
+  follow_redirects: false
+  found_status:
+  - 200
+- name: Onedio
+  category: social
+  tags:
+  - tr
+  url: https://onedio.com/profil/{username}
+  check_url: https://onedio.com/profil/{username}
+  type: html
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Technopat Sosyal
+  category: forum
+  tags:
+  - tr
+  url: https://www.technopat.net/sosyal/uye/?username={username}
+  check_url: https://www.technopat.net/sosyal/uye/?username={username}
+  type: html
+  follow_redirects: false
+  found_status:
+  - 301
+  - 302
+  - 303
+  missing_status:
+  - 200
+  - 404
+  known:
+  - mehmet
+  source: UserSnex (verificato 24/11/2026)
+- name: TenChat
+  category: social
+  tags:
+  - ru
+  url: https://tenchat.ru/{username}
+  check_url: https://tenchat.ru/{username}
+  type: html
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Uludağ Sözlük
+  category: social
+  tags:
+  - tr
+  url: https://www.uludagsozluk.com/k/{username}/
+  check_url: https://www.uludagsozluk.com/k/{username}/
+  type: html
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+
+# ---- secondo lotto: vendite online, news e blog, social e forum regionali (aggiunti il 24/11/2026)
+- name: Aukro
+  category: shopping
+  tags:
+  - cz
+  url: https://aukro.cz/uzivatel/{username}
+  check_url: https://aukro.cz/uzivatel/{username}
+  type: html
+  known:
+  - robertw32
+  source: UserSnex (verificato 24/11/2026)
+  present_text:
+  - Hodnocení prodejce
+- name: Delcampe
+  category: shopping
+  tags:
+  - fr
+  - be
+  url: https://www.delcampe.net/en_GB/collectables/store/{username}
+  check_url: https://www.delcampe.net/en_GB/collectables/store/{username}
+  type: html
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+- name: Njuškalo (trgovina)
+  category: shopping
+  tags:
+  - hr
+  url: https://www.njuskalo.hr/trgovina/{username}
+  check_url: https://www.njuskalo.hr/trgovina/{username}
+  type: html
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Bolha (trgovina)
+  category: shopping
+  tags:
+  - si
+  url: https://www.bolha.com/trgovina/{username}
+  check_url: https://www.bolha.com/trgovina/{username}
+  type: html
+  known:
+  - zz99
+  source: UserSnex (verificato 24/11/2026)
+- name: Bionluk
+  category: lavoro
+  tags:
+  - tr
+  url: https://bionluk.com/{username}
+  check_url: https://bionluk.com/{username}
+  type: html
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Fler
+  category: shopping
+  tags:
+  - cz
+  url: https://www.fler.cz/{username}
+  check_url: https://www.fler.cz/{username}
+  type: html
+  known:
+  - veverkal
+  source: UserSnex (verificato 24/11/2026)
+- name: SAShE
+  category: shopping
+  tags:
+  - sk
+  url: https://www.sashe.sk/{username}
+  check_url: https://www.sashe.sk/{username}
+  type: html
+  known:
+  - lluko
+  source: UserSnex (verificato 24/11/2026)
+- name: Meska
+  category: shopping
+  tags:
+  - hu
+  url: https://www.meska.hu/shop/{username}
+  check_url: https://www.meska.hu/shop/{username}
+  type: html
+  known:
+  - KreativMarvanypor
+  source: UserSnex (verificato 24/11/2026)
+- name: Todocoleccion
+  category: shopping
+  tags:
+  - es
+  url: https://www.todocoleccion.net/usuario/valoraciones/{username}/vendedor
+  check_url: https://www.todocoleccion.net/usuario/valoraciones/{username}/vendedor
+  type: html
+  known:
+  - atapuerca
+  source: UserSnex (verificato 24/11/2026)
+- name: Club Mediapart
+  category: news
+  tags:
+  - fr
+  url: https://blogs.mediapart.fr/{username}/blog
+  check_url: https://blogs.mediapart.fr/{username}/blog
+  type: html
+  known:
+  - ahmed
+  source: UserSnex (verificato 24/11/2026)
+- name: AgoraVox
+  category: news
+  tags:
+  - fr
+  url: https://www.agoravox.fr/auteur/{username}
+  check_url: https://www.agoravox.fr/auteur/{username}
+  type: html
+  known:
+  - krokodilo
+  source: UserSnex (verificato 24/11/2026)
+  absent_text:
+  - <title>Erreur - AgoraVox
+- name: der Freitag (community)
+  category: news
+  tags:
+  - de
+  url: https://www.freitag.de/autoren/{username}
+  check_url: https://www.freitag.de/autoren/{username}
+  type: html
+  known:
+  - wimalasena
+  source: UserSnex (verificato 24/11/2026)
+- name: iDNES Blog
+  category: news
+  tags:
+  - cz
+  url: https://{username}.blog.idnes.cz/
+  check_url: https://{username}.blog.idnes.cz/
+  type: html
+  known:
+  - info
+  regex: ^[A-Za-z0-9-]{2,40}$
+  dns_missing: true
+  source: UserSnex (verificato 24/11/2026)
+  follow_redirects: false
+  found_status:
+  - 302
+  missing_status:
+  - 404
+- name: Blog.hu
+  category: blog
+  tags:
+  - hu
+  url: https://{username}.blog.hu/
+  check_url: https://{username}.blog.hu/
+  type: html
+  known:
+  - kettosmerce
+  regex: ^[A-Za-z0-9-]{2,40}$
+  dns_missing: true
+  source: UserSnex (verificato 24/11/2026)
+  follow_redirects: false
+  found_status:
+  - 302
+  missing_status:
+  - 301
+- name: Blogger.ba
+  category: blog
+  tags:
+  - ba
+  url: https://{username}.blogger.ba/
+  check_url: https://{username}.blogger.ba/
+  type: html
+  known:
+  - morgana
+  regex: ^[A-Za-z0-9-]{2,40}$
+  dns_missing: true
+  source: UserSnex (verificato 24/11/2026)
+  follow_redirects: false
+  found_status:
+  - 200
+  missing_status:
+  - 301
+  - 302
+- name: Fotka.pl
+  category: social
+  tags:
+  - pl
+  url: https://fotka.pl/profil/{username}
+  check_url: https://fotka.pl/profil/{username}
+  type: html
+  known:
+  - test
+  source: UserSnex (verificato 24/11/2026)
+- name: DonanımArşivi Forum
+  category: forum
+  tags:
+  - tr
+  url: https://forum.donanimarsivi.com/uyeler/?username={username}
+  check_url: https://forum.donanimarsivi.com/uyeler/?username={username}
+  type: html
+  follow_redirects: false
+  found_status:
+  - 303
+  missing_status:
+  - 200
+  - 404
+  known:
+  - adilbey
+  source: UserSnex (verificato 24/11/2026)
+- name: DSLR-Forum
+  category: forum
+  tags:
+  - de
+  url: https://www.dslr-forum.de/members/?username={username}
+  check_url: https://www.dslr-forum.de/members/?username={username}
+  type: html
+  known:
+  - derfred
+  source: UserSnex (verificato 24/11/2026)
+  follow_redirects: false
+  found_status:
+  - 301
+  - 302
+  - 303
+  missing_status:
+  - 200
+  - 404
+- name: 3DCenter Forum
+  category: forum
+  tags:
+  - de
+  url: https://www.forum-3dcenter.org/vbulletin/member.php?username={username}
+  check_url: https://www.forum-3dcenter.org/vbulletin/member.php?username={username}
+  type: html
+  known:
+  - aceCrasher
+  source: UserSnex (verificato 24/11/2026)
+  absent_text:
+  - Dieser Benutzer hat sich nicht registriert
+- name: Pixelfed (pixelfed.fr)
+  category: foto
+  tags:
+  - fr
+  url: https://pixelfed.fr/{username}
+  check_url: https://pixelfed.fr/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_.]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+  missing_status:
+  - 400
+  - 404
+  - 410
+- name: Pixelfed (pixelfed.eu)
+  category: foto
+  url: https://pixelfed.eu/{username}
+  check_url: https://pixelfed.eu/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_.]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+  known:
+  - zir0h
+  source: UserSnex (verificato 24/11/2026)
+  missing_status:
+  - 400
+  - 404
+  - 410
+- name: Pixelfed (pixel.tchncs.de)
+  category: foto
+  tags:
+  - de
+  url: https://pixel.tchncs.de/{username}
+  check_url: https://pixel.tchncs.de/{username}
+  regex: ^[A-Za-z0-9_.]{1,30}$
+  known:
+  - milan
+  source: UserSnex (verificato 24/11/2026)
+  type: html
+- name: PeerTube (tube.tchncs.de)
+  category: video
+  tags:
+  - de
+  url: https://tube.tchncs.de/a/{username}
+  check_url: https://tube.tchncs.de/api/v1/accounts/{username}
+  require: id
+  fields:
+    display_name: displayName
+    bio: description
+    created_at: createdAt
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+
+# ---- terzo lotto: giochi, video e audio, sviluppo, programmazione competitiva, social (aggiunti il 24/11/2026)
+- name: MyShows
+  category: hobby
+  tags:
+  - ru
+  url: https://myshows.me/{username}/
+  check_url: https://myshows.me/{username}/
+  type: html
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Tanki Online (classifiche)
+  category: giochi
+  tags:
+  - ru
+  url: https://ratings.tankionline.com/en/user/{username}/
+  check_url: https://ratings.tankionline.com/api/eu/profile/?user={username}&lang=en
+  type: json
+  require: response.name
+  fields:
+    display_name: response.name
+  known:
+  - Neri
+  source: UserSnex (verificato 24/11/2026)
+- name: PlayOK
+  category: giochi
+  tags:
+  - pl
+  url: https://www.playok.com/en/stat.phtml?u={username}
+  check_url: https://www.playok.com/en/stat.phtml?u={username}
+  type: html
+  absent_text:
+  - '<p>registered: </p>'
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Lidraughts
+  category: giochi
+  tags:
+  - nl
+  url: https://lidraughts.org/@/{username}
+  check_url: https://lidraughts.org/api/user/{username}
+  type: json
+  require: id
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Lishogi
+  category: giochi
+  url: https://lishogi.org/@/{username}
+  check_url: https://lishogi.org/api/user/{username}
+  type: json
+  require: id
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Sponsr.ru
+  category: social
+  tags:
+  - ru
+  url: https://sponsr.ru/{username}/
+  check_url: https://sponsr.ru/{username}/
+  type: html
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: BitChute
+  category: video
+  url: https://www.bitchute.com/channel/{username}/
+  check_url: https://www.bitchute.com/channel/{username}/
+  type: html
+  present_text:
+  - <meta name="x-stage" content="channel">
+  known:
+  - bitchute
+  source: UserSnex (verificato 24/11/2026)
+- name: hearthis.at
+  category: musica
+  tags:
+  - at
+  - de
+  url: https://hearthis.at/{username}/
+  check_url: https://hearthis.at/{username}/
+  type: html
+  follow_redirects: false
+  found_status:
+  - 200
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+- name: Hipolink
+  category: social
+  tags:
+  - ru
+  url: https://hipolink.net/{username}
+  check_url: https://hipolink.net/{username}
+  type: html
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+- name: GitFlic
+  category: sviluppo
+  tags:
+  - ru
+  url: https://gitflic.ru/user/{username}
+  check_url: https://gitflic.ru/user/{username}
+  type: html
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: KDE Invent
+  category: sviluppo
+  tags:
+  - de
+  url: https://invent.kde.org/{username}
+  check_url: https://invent.kde.org/api/v4/users?username={username}
+  type: json
+  require: 0.id
+  fields:
+    display_name: 0.name
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+- name: freedesktop GitLab
+  category: sviluppo
+  url: https://gitlab.freedesktop.org/{username}
+  check_url: https://gitlab.freedesktop.org/api/v4/users?username={username}
+  type: json
+  require: 0.id
+  fields:
+    display_name: 0.name
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+- name: Disroot Git
+  category: sviluppo
+  tags:
+  - nl
+  url: https://git.disroot.org/{username}
+  check_url: https://git.disroot.org/api/v1/users/{username}
+  type: json
+  require: id
+  known:
+  - test
+  source: UserSnex (verificato 24/11/2026)
+- name: Eolymp
+  category: sviluppo
+  tags:
+  - ua
+  - az
+  url: https://eolymp.com/en/users/{username}
+  check_url: https://eolymp.com/en/users/{username}
+  type: html
+  known:
+  - ahmed
+  source: UserSnex (verificato 24/11/2026)
+- name: Kattis
+  category: sviluppo
+  tags:
+  - se
+  url: https://open.kattis.com/users/{username}
+  check_url: https://open.kattis.com/users/{username}
+  type: html
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Podster.fm
+  category: musica
+  tags:
+  - ru
+  url: https://{username}.podster.fm/
+  check_url: https://{username}.podster.fm/
+  type: html
+  regex: ^[A-Za-z0-9-]{2,40}$
+  dns_missing: true
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+- name: Hejto
+  category: social
+  tags:
+  - pl
+  url: https://www.hejto.pl/uzytkownik/{username}
+  check_url: https://www.hejto.pl/uzytkownik/{username}
+  type: html
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Gportal
+  category: blog
+  tags:
+  - hu
+  url: https://{username}.gportal.hu/
+  check_url: https://{username}.gportal.hu/
+  type: html
+  regex: ^[A-Za-z0-9-]{2,40}$
+  dns_missing: true
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Spin.de
+  category: social
+  tags:
+  - de
+  url: https://www.spin.de/hp/{username}/
+  check_url: https://www.spin.de/hp/{username}/
+  type: html
+  known:
+  - alex
+  source: UserSnex (verificato 24/11/2026)
+
+# ---- quarto lotto (verificati 24/11/2026)
+- name: Mastodon (mastodontech.de)
+  category: social
+  tags:
+  - de
+  url: https://mastodontech.de/@{username}
+  check_url: https://mastodontech.de/api/v1/accounts/lookup?acct={username}
+  type: json
+  known:
+  - markusblogde
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+- name: Mastodon (mastodont.cat)
+  category: social
+  tags:
+  - es
+  url: https://mastodont.cat/@{username}
+  check_url: https://mastodont.cat/.well-known/webfinger?resource=acct:{username}@mastodont.cat
+  type: json
+  known:
+  - spla
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: subject
+- name: Mastodon (eupolicy.social)
+  category: social
+  tags:
+  - eu
+  url: https://eupolicy.social/@{username}
+  check_url: https://eupolicy.social/api/v1/accounts/lookup?acct={username}
+  type: json
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+- name: Mastodon (graz.social)
+  category: social
+  tags:
+  - at
+  url: https://graz.social/@{username}
+  check_url: https://graz.social/api/v1/accounts/lookup?acct={username}
+  type: json
+  known:
+  - wir
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+- name: Mastodon (wien.rocks)
+  category: social
+  tags:
+  - at
+  url: https://wien.rocks/@{username}
+  check_url: https://wien.rocks/api/v1/accounts/lookup?acct={username}
+  type: json
+  known:
+  - FediverseFoundation
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+- name: Mastodon (ruhr.social)
+  category: social
+  tags:
+  - de
+  url: https://ruhr.social/@{username}
+  check_url: https://ruhr.social/api/v1/accounts/lookup?acct={username}
+  type: json
+  known:
+  - orga
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+- name: Mastodon (toot.cat)
+  category: social
+  url: https://toot.cat/@{username}
+  check_url: https://toot.cat/api/v1/accounts/lookup?acct={username}
+  type: json
+  known:
+  - woozle
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+- name: Mastodon (mastodon.eus)
+  category: social
+  tags:
+  - es
+  url: https://mastodon.eus/@{username}
+  check_url: https://mastodon.eus/api/v1/accounts/lookup?acct={username}
+  type: json
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+- name: Mastodon (masto.pt)
+  category: social
+  tags:
+  - pt
+  url: https://masto.pt/@{username}
+  check_url: https://masto.pt/api/v1/accounts/lookup?acct={username}
+  type: json
+  known:
+  - hugo
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+- name: Mastodon (toot.si)
+  category: social
+  tags:
+  - si
+  url: https://toot.si/@{username}
+  check_url: https://toot.si/api/v1/accounts/lookup?acct={username}
+  type: json
+  known:
+  - luka
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+- name: Mastodon (dresden.network)
+  category: social
+  tags:
+  - de
+  url: https://dresden.network/@{username}
+  check_url: https://dresden.network/api/v1/accounts/lookup?acct={username}
+  type: json
+  known:
+  - markus
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+- name: Mastodon (mastodon.ml)
+  category: social
+  tags:
+  - ru
+  url: https://mastodon.ml/@{username}
+  check_url: https://mastodon.ml/api/v1/accounts/lookup?acct={username}
+  type: json
+  known:
+  - mo
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+- name: Mastodon (swiss.social)
+  category: social
+  tags:
+  - ch
+  url: https://swiss.social/@{username}
+  check_url: https://swiss.social/api/v1/accounts/lookup?acct={username}
+  type: json
+  known:
+  - chm
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+- name: Mastodon (f.cz)
+  category: social
+  tags:
+  - cz
+  url: https://f.cz/@{username}
+  check_url: https://f.cz/api/v1/accounts/lookup?acct={username}
+  type: json
+  known:
+  - xChaos
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+- name: Mastodon (mastodon.tn)
+  category: social
+  tags:
+  - tn
+  url: https://mastodon.tn/@{username}
+  check_url: https://mastodon.tn/api/v1/accounts/lookup?acct={username}
+  type: json
+  known:
+  - mastoadmin
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+- name: Mastodon (mastodon.africa)
+  category: social
+  tags:
+  - za
+  url: https://mastodon.africa/@{username}
+  check_url: https://mastodon.africa/api/v1/accounts/lookup?acct={username}
+  type: json
+  known:
+  - wogan
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+- name: Mastodon (bildung.social)
+  category: social
+  tags:
+  - de
+  url: https://bildung.social/@{username}
+  check_url: https://bildung.social/api/v1/accounts/lookup?acct={username}
+  type: json
+  known:
+  - fries
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+- name: Misskey (misskey.design)
+  category: social
+  tags:
+  - jp
+  url: https://misskey.design/@{username}
+  check_url: https://misskey.design/.well-known/webfinger?resource=acct:{username}@misskey.design
+  type: json
+  known:
+  - info
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,20}$
+  require: subject
+- name: Misskey (sushi.ski)
+  category: social
+  tags:
+  - jp
+  url: https://sushi.ski/@{username}
+  check_url: https://sushi.ski/.well-known/webfinger?resource=acct:{username}@sushi.ski
+  type: json
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,20}$
+  require: subject
+- name: Misskey (misskey.tr)
+  category: social
+  tags:
+  - tr
+  url: https://misskey.tr/@{username}
+  check_url: https://misskey.tr/.well-known/webfinger?resource=acct:{username}@misskey.tr
+  type: json
+  known:
+  - sinanbasar
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,20}$
+  require: subject
+- name: Lemmy (infosec.pub)
+  category: forum
+  url: https://infosec.pub/u/{username}
+  check_url: https://infosec.pub/api/v3/user?username={username}
+  type: json
+  known:
+  - jerry
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: person_view.person.name
+  fields:
+    display_name: person_view.person.display_name
+    bio: person_view.person.bio
+    avatar: person_view.person.avatar
+- name: Lemmy (lemmy.eus)
+  category: forum
+  tags:
+  - es
+  url: https://lemmy.eus/u/{username}
+  check_url: https://lemmy.eus/api/v3/user?username={username}
+  type: json
+  known:
+  - mikelgs
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: person_view.person.name
+  fields:
+    display_name: person_view.person.display_name
+    bio: person_view.person.bio
+    avatar: person_view.person.avatar
+- name: Lemmy (suppo.fi)
+  category: forum
+  tags:
+  - fi
+  url: https://suppo.fi/u/{username}
+  check_url: https://suppo.fi/api/v3/user?username={username}
+  type: json
+  known:
+  - wallace
+  source: UserSnex (verificato 24/11/2026)
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: person_view.person.name
+  fields:
+    display_name: person_view.person.display_name
+    bio: person_view.person.bio
+    avatar: person_view.person.avatar
+- name: Funkwhale (open.audio)
+  category: musica
+  tags:
+  - fr
+  url: https://open.audio/@{username}
+  check_url: https://open.audio/.well-known/webfinger?resource=acct:{username}@open.audio
+  type: json
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+  require: subject
+  missing_status:
+  - 400
+  - 404
+  - 410
+- name: Moviepilot
+  category: hobby
+  tags:
+  - de
+  url: https://www.moviepilot.de/users/{username}
+  check_url: https://www.moviepilot.de/users/{username}
+  type: html
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Flat.io
+  category: musica
+  tags:
+  - fr
+  url: https://flat.io/@{username}
+  check_url: https://flat.io/@{username}
+  type: html
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Herohero
+  category: social
+  tags:
+  - cz
+  url: https://herohero.co/{username}
+  check_url: https://herohero.co/{username}
+  type: html
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Audiomack
+  category: musica
+  url: https://audiomack.com/{username}
+  check_url: https://audiomack.com/{username}
+  type: html
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+  absent_text:
+  - <title>Audiomack - Music platform empowering
+- name: PROHARDVER!
+  category: forum
+  tags:
+  - hu
+  url: https://prohardver.hu/tag/{username}.html
+  check_url: https://prohardver.hu/tag/{username}.html
+  type: html
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Milkshake
+  category: social
+  tags:
+  - au
+  url: https://msha.ke/{username}
+  check_url: https://msha.ke/{username}
+  type: html
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: HowLongToBeat
+  category: giochi
+  url: https://howlongtobeat.com/user/{username}
+  check_url: https://howlongtobeat.com/user/{username}
+  type: html
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+- name: Travellerspoint
+  category: hobby
+  tags:
+  - nl
+  url: https://www.travellerspoint.com/users/{username}/
+  check_url: https://www.travellerspoint.com/users/{username}/
+  type: html
+  known:
+  - peter
+  source: UserSnex (verificato 24/11/2026)
+- name: GitLab (gitlab.torproject.org)
+  category: sviluppo
+  url: https://gitlab.torproject.org/{username}
+  check_url: https://gitlab.torproject.org/api/v4/users?username={username}
+  type: json
+  known:
+  - root
+  source: UserSnex (verificato 24/11/2026)
+  require: 0.username
+  fields:
+    display_name: 0.name
+    avatar: 0.avatar_url
+- name: GitLab (gitlab.alpinelinux.org)
+  category: sviluppo
+  url: https://gitlab.alpinelinux.org/{username}
+  check_url: https://gitlab.alpinelinux.org/api/v4/users?username={username}
+  type: json
+  known:
+  - root
+  source: UserSnex (verificato 24/11/2026)
+  require: 0.username
+  fields:
+    display_name: 0.name
+    avatar: 0.avatar_url
+- name: Gitea (src.opensuse.org)
+  category: sviluppo
+  tags:
+  - de
+  url: https://src.opensuse.org/{username}
+  check_url: https://src.opensuse.org/api/v1/users/{username}
+  type: json
+  known:
+  - adamm
+  source: UserSnex (verificato 24/11/2026)
+  require: login
+  fields:
+    display_name: full_name
+    avatar: avatar_url
+- name: Discourse (forum.blender.org)
+  category: forum
+  tags:
+  - nl
+  url: https://forum.blender.org/u/{username}
+  check_url: https://forum.blender.org/u/{username}.json
+  type: json
+  known:
+  - fsiddi
+  source: UserSnex (verificato 24/11/2026)
+  require: user.username
+  fields:
+    display_name: user.name
+- name: Discourse (discourse.ardour.org)
+  category: forum
+  url: https://discourse.ardour.org/u/{username}
+  check_url: https://discourse.ardour.org/u/{username}.json
+  type: json
+  known:
+  - paul
+  source: UserSnex (verificato 24/11/2026)
+  require: user.username
+  fields:
+    display_name: user.name
+- name: Glass
+  category: foto
+  url: https://glass.photo/{username}
+  check_url: https://glass.photo/{username}
+  type: html
+  known:
+  - tom
+  source: UserSnex (verificato 24/11/2026)
+- name: Read.cash
+  category: blog
+  url: https://read.cash/@{username}
+  check_url: https://read.cash/@{username}
+  type: html
+  known:
+  - Read.Cash
+  source: UserSnex (verificato 24/11/2026)
+- name: Salla
+  category: shopping
+  tags:
+  - sa
+  url: https://salla.sa/{username}
+  check_url: https://salla.sa/{username}
+  type: html
+  known:
+  - admin
+  source: UserSnex (verificato 24/11/2026)
+
+# ============================================================ versioni migliorate
+# Siti presenti anche nelle altre liste, qui con API pubbliche, dati del profilo per la
+# correlazione o regole più precise: hanno la precedenza sulle altre liste.
+- name: Bluesky
+  category: social
+  url: https://bsky.app/profile/{username}.bsky.social
+  check_url: https://public.api.bsky.app/xrpc/app.bsky.actor.getProfile?actor={username}.bsky.social
+  regex: "^[A-Za-z0-9-]{3,18}$"
+  missing_status: [400, 404]
+  require: did
+  fields:
+    display_name: displayName
+    bio: description
+    avatar: avatar
+    created_at: createdAt
+- name: Chess.com
+  category: giochi
+  url: https://www.chess.com/member/{username}
+  check_url: https://api.chess.com/pub/player/{username}
+  require: player_id
+  fields:
+    display_name: name
+    avatar: avatar
+    location: location
+    created_at: joined
+  known: ["hikaru"]
+- name: Codeberg
+  category: sviluppo
+  url: https://codeberg.org/{username}
+  check_url: https://codeberg.org/api/v1/users/{username}
+  fields:
+    display_name: full_name
+    bio: description
+    location: location
+    avatar: avatar_url
+    created_at: created
+    links: [website]
+- name: DEV
+  category: sviluppo
+  url: https://dev.to/{username}
+  check_url: https://dev.to/api/users/by_username?url={username}
+  fields:
+    display_name: name
+    bio: summary
+    location: location
+    avatar: profile_image
+    created_at: joined_at
+    links:
+      - website_url
+      - {path: twitter_username, template: "https://x.com/{}"}
+      - {path: github_username, template: "https://github.com/{}"}
+  known: ["ben"]
+- name: Docker Hub
+  category: sviluppo
+  url: https://hub.docker.com/u/{username}
+  check_url: https://hub.docker.com/v2/users/{username}/
+  regex: "^[a-z0-9]{4,30}$"
+  fields:
+    display_name: full_name
+    location: location
+    avatar: gravatar_url
+    created_at: date_joined
+    links: [profile_url]
+- name: GitHub
+  category: sviluppo
+  url: https://github.com/{username}
+  check_url: https://api.github.com/users/{username}
+  regex: "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$"
+  rate_per_sec: 1        # API anonima: 60 richieste l'ora
+  fields:
+    display_name: name
+    bio: bio
+    location: location
+    avatar: avatar_url
+    created_at: created_at
+    links:
+      - blog
+      - {path: twitter_username, template: "https://x.com/{}"}
+  known: ["torvalds"]
+- name: GitLab
+  category: sviluppo
+  url: https://gitlab.com/{username}
+  check_url: https://gitlab.com/api/v4/users?username={username}
+  require: "0.username"
+  fields:
+    display_name: "0.name"
+    avatar: "0.avatar_url"
+- name: Gravatar
+  category: identità
+  url: https://gravatar.com/{username}
+  check_url: https://api.gravatar.com/v3/profiles/{username}
+  fields:
+    display_name: display_name
+    bio: description
+    location: location
+    avatar: avatar_url
+    links:
+      - {path: verified_accounts, key: url}
+      - {path: links, key: url}
+- name: Hacker News
+  category: forum
+  url: https://news.ycombinator.com/user?id={username}
+  check_url: https://hacker-news.firebaseio.com/v0/user/{username}.json
+  require: id
+  fields:
+    bio: about
+    created_at: created
+  known: ["pg"]
+- name: Hugging Face
+  category: sviluppo
+  url: https://huggingface.co/{username}
+  check_url: https://huggingface.co/api/users/{username}/overview
+  require: user
+  fields:
+    display_name: fullname
+    avatar: avatarUrl
+    created_at: createdAt
+  known: ["julien-c"]
+- name: Keybase
+  category: identità
+  url: https://keybase.io/{username}
+  check_url: https://keybase.io/_/api/1.0/user/lookup.json?usernames={username}
+  regex: "^[A-Za-z0-9_]{2,16}$"
+  require: them.0.basics.username
+  fields:
+    display_name: them.0.profile.full_name
+    bio: them.0.profile.bio
+    location: them.0.profile.location
+    avatar: them.0.pictures.primary.url
+    created_at: them.0.basics.ctime
+    links:
+      - {path: them.0.proofs_summary.all, key: service_url}
+  known: ["chris"]
+- name: Lichess
+  category: giochi
+  url: https://lichess.org/@/{username}
+  check_url: https://lichess.org/api/user/{username}
+  require: id
+  fields:
+    display_name: profile.realName
+    bio: profile.bio
+    location: profile.location
+    created_at: createdAt
+    links: [profile.links]
+  known: ["thibault"]
+- name: Mastodon (mastodon.social)
+  category: social
+  url: https://mastodon.social/@{username}
+  check_url: https://mastodon.social/api/v1/accounts/lookup?acct={username}
+  regex: "^[A-Za-z0-9_]{1,30}$"
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+      - {path: fields, key: value}
+  known: ["Gargron"]
+- name: mastodon.uno
+  category: social
+  tags:
+  - it
+  url: https://mastodon.uno/@{username}
+  check_url: https://mastodon.uno/api/v1/accounts/lookup?acct={username}
+  regex: ^[A-Za-z0-9_]{1,30}$
+  require: id
+  fields:
+    display_name: display_name
+    bio: note
+    avatar: avatar
+    created_at: created_at
+    links:
+    - path: fields
+      key: value
+  known:
+  - mastodonuno
+  source: UserSnex (verificato 23/11/2026)
+- name: peertube.uno
+  category: video
+  tags:
+  - it
+  url: https://peertube.uno/a/{username}
+  check_url: https://peertube.uno/api/v1/accounts/{username}
+  require: id
+  fields:
+    display_name: displayName
+    bio: description
+    created_at: createdAt
+  known:
+  - admin
+  source: UserSnex (verificato 23/11/2026)
+- name: PyPI
+  category: sviluppo
+  url: https://pypi.org/user/{username}/
+  check_url: https://pypi.org/user/{username}/
+  type: html
+- name: Reddit
+  category: social
+  url: https://www.reddit.com/user/{username}
+  check_url: https://www.reddit.com/user/{username}/about.json
+  regex: "^[A-Za-z0-9_-]{3,20}$"
+  require: data.name
+  rate_per_sec: 0.5
+  fields:
+    display_name: data.subreddit.title
+    bio: data.subreddit.public_description
+    avatar: data.icon_img
+    created_at: data.created_utc
+  known: ["spez"]
+- name: Telegram
+  category: messaggistica
+  url: https://t.me/{username}
+  check_url: https://t.me/{username}
+  type: html
+  regex: "^[A-Za-z][A-Za-z0-9_]{4,31}$"
+  present_text: tgme_page_title
+  known: ["durov"]
+  # TikTok: la pagina del profilo rimanda al login per i programmi; l'oEmbed pubblico invece risponde
+  # 200 con il nome del creator se l'account esiste e 400 se non esiste.
+- name: TikTok
+  category: social
+  url: https://www.tiktok.com/@{username}
+  check_url: https://www.tiktok.com/oembed?url=https://www.tiktok.com/@{username}
+  regex: "^[A-Za-z0-9_.]{2,24}$"
+  require: author_url
+  missing_status: [400, 404]
+  rate_per_sec: 1
+  fields:
+    display_name: author_name
+  known: ["tiktok", "khaby.lame"]
+- name: WordReference Forum
+  category: forum
+  url: https://forum.wordreference.com/members/?username={username}
+  check_url: https://forum.wordreference.com/members/?username={username}
+  type: html
+  follow_redirects: false
+  found_status: [301, 302, 303]   # utente esistente: rimanda a /members/<nome>.<id>/
+  missing_status: [200]           # utente inesistente: resta sulla pagina "membri"
+  known: ["admin"]

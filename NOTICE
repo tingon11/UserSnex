@@ -1,0 +1,19 @@
+UserSnex — username OSINT
+Copyright (C) 2026 Andrea Cumini <andrea@osintinfo.net> — www.osintinfo.net
+
+Il codice di UserSnex è distribuito sotto GNU GPL v3 o successiva (file LICENSE), con un termine
+aggiuntivo ai sensi della sezione 7(b) (file ADDITIONAL_TERMS.md): chi lo ridistribuisce, anche
+modificato, deve conservare in modo visibile, nella finestra Info e licenze e nella documentazione,
+l'attribuzione:
+
+  Basato su UserSnex di Andrea Cumini - Osintinfo.net - andrea@osintinfo.net
+
+Contiene definizioni di siti derivate da progetti di terze parti, ciascuna nel proprio file e sotto
+la propria licenza (dettagli e testi completi in THIRD_PARTY_NOTICES.md):
+
+  lists/whatsmyname.yaml              WhatsMyName (Micah Hoffman)  CC BY-SA 4.0
+  lists/sherlock.yaml                 Sherlock Project             MIT
+  lists/maigret.yaml                  Maigret (Soxoj)              MIT
+
+I file in lists/ si scaricano dai loro repository (non sono nel repository di UserSnex).
+usersnex/sites/usersnex.yaml è di UserSnex (GPL v3 o successiva).

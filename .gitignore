@@ -1,0 +1,27 @@
+__pycache__/
+*.pyc
+.venv/
+.usersnex_cache/
+results/
+*.egg-info/
+.pytest_cache/
+.idea/
+# liste scaricate dai loro repository (Config > Aggiorna liste) e dati personali
+/lists/
+/mytargets.yaml
+config.json
+site_health.json
+packs_info.json
+usersnex/sites/_pack_*.yaml
+/sites/
+# file temporanei dei lotti di candidati (solo usersnex/sites/usersnex.yaml è versionato)
+/usersnex_regioni*.yaml
+tools/candidates*.yaml
+tools/*_report.json
+tools/usersnex_regioni*.yaml
+tools/*.bak*
+*.bak*
+# build di PyInstaller (tools/build_exe.py)
+/build/
+/dist/
+/banlist.json
